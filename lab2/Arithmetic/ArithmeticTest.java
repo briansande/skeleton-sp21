@@ -29,4 +29,6 @@ public class ArithmeticTest {
         assertEquals(-6, Arithmetic.sum(0, -6));
         assertEquals(0, Arithmetic.sum(6, -6));
     }
+
+
 }
