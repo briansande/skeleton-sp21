@@ -3,46 +3,47 @@ package deque;
 public class ArrayDeque<T> {
 
 
-    private T[] items;
+    public T[] items;
 
-    private int size;
-    private int nextFirst;
-    private int nextLast;
+    public int size;
+    public int nextFirst;
+    public int nextLast;
 
     private static float RFACTOR = 2;
 
     public ArrayDeque(){
         size = 0;
         items = (T[]) new Object[8];
+        nextFirst = 4;
+        nextLast = nextFirst+1;
 
     }
 
     private void resize(int cap){
         T[] newArray = (T[]) new Object[cap];
         System.arraycopy(this.items, 0, newArray,0, this.size);
-
         this.items = newArray;
 
     }
 
-//    /** Helper method to create the sentinel node */
-//    private void createSentinel(){
-//
-//    }
-//
-//
+
 //    /** Adds and item of type T to the front of the deque */
 //    public void addFirst(T item){
 //
 //
-//    }
-//
-//    /** Adds and item of type T to the back of the deque */
-//    public void addLast(T item){
 //
 //
 //    }
 //
+    /** Adds and item of type T to the back of the deque */
+    public void addLast(T item){
+        this.items[nextLast]= item;
+        nextLast++;
+        size++;
+        // Todo: nextLast needs to rollover to the front of the array.
+
+    }
+
 //    /** Returns true if the deque is empty, otherwise returns false */
 //    public boolean isEmpty(){
 //        return this.size() == 0;
@@ -81,6 +82,9 @@ public class ArrayDeque<T> {
 
     public static void main(String args[]){
         ArrayDeque<Integer> ad1 = new ArrayDeque<>();
+        ad1.addLast(5);
+        ad1.addLast(5);
+        ad1.addLast(5);
 
 
     }
