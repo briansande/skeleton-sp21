@@ -25,8 +25,6 @@ public class LinkedListDeque<T> {
     public LinkedListDeque(){
         size = 0;
         createSentinel();
-
-
     }
 
     /** Create a LLDeque with one item */
