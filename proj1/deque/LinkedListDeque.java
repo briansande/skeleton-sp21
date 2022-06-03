@@ -1,5 +1,8 @@
 package deque;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 public class LinkedListDeque<T> {
     public class Node{
         public T item;
@@ -88,22 +91,53 @@ public class LinkedListDeque<T> {
     }
 
 
-//    /** Removes and return the first item of the deque */
-//    public T removeFirst(){
-//
-//    }
-//
-//    /** Removes and returns the last item of the deque */
-//    public T removeLast(){
-//
-//    }
-//
-//    /** Gets the item at the given index. 0 is the front, 1 is next, etc. Returns null if the item doesn't exist */
-//    public T get(int index){
-//
-//    }
-//
-//
+    /** Removes and return the first item of the deque */
+    public T removeFirst(){
+        // First item is sentinel.next
+        // Change second item (sentinel.next.next) to be sentinel.next
+        if (this.isEmpty()) return null;
+        T firstItem = sentinel.next.item;
+        sentinel.next = sentinel.next.next;
+        sentinel.next.prev = sentinel;
+        size--;
+
+        return firstItem;
+
+    }
+
+    /** Removes and returns the last item of the deque */
+    public T removeLast(){
+        if (this.isEmpty()) return null;
+        // Last item is sentinel.prev
+        T lastItem = sentinel.prev.item;
+        sentinel.prev = sentinel.prev.prev;
+        sentinel.prev.next = sentinel;
+        size--;
+
+        return lastItem;
+    }
+
+
+
+    /** Gets the item at the given index. 0 is the front, 1 is next, etc. Returns null if the item doesn't exist */
+    public T get(int index){
+        // Todo: Implement search that can go forward or backward depending on size and index.
+
+        if (this.size() == 0) return null;          // Deque is empty
+        if (index+1 > this.size()) return null;     // Index doesn't exist
+
+        // Search forward to get the item.
+        Node n = sentinel.next;
+        int idx = 0;
+        while (idx<index){
+            n = n.next;
+            idx++;
+        }
+
+        return n.item;
+    }
+
+
 
 ////    /**  */
 ////    public Iterator<T> iterator(){
@@ -114,26 +148,11 @@ public class LinkedListDeque<T> {
 ////    }
 ////
 
-    public static void main(String args[]){
-//        LinkedListDeque<Integer> ll = new LinkedListDeque<>(5);
-//        System.out.println(ll.size());
-//        System.out.println(ll.isEmpty());
-
-        LinkedListDeque<Integer> l2 = new LinkedListDeque<>();
 
 
-        l2.addFirst(10);
-        l2.addLast(20);
-        l2.addLast(30);
-        l2.addLast(40);
-        l2.addFirst(5);
-        l2.addFirst(1);
-
-        System.out.println(l2.size());
-        System.out.println(l2.isEmpty());
-        l2.printDeque();
-
-
-    }
+//    public static void main(String args[]){
+//        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+//
+//    }
 
 }
